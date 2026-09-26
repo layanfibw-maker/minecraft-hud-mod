@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "hudmod",
+    "name": "Lunar HUD Mod",
+    "description": "A HUD mod in the style of Lunar Client with drag-and-drop positioning",
+    "version": "1.0.0",
+    "mcversion": "1.8",
+    "url": "https://github.com/layanfibw-maker/minecraft-hud-mod",
+    "updateUrl": "",
+    "authorList": ["You"],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

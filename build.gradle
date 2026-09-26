@@ -1,0 +1,33 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "https://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+version = "1.0.0"
+group = "com.hudmod"
+archivesBaseName = "hudmod"
+
+minecraft {
+    version = "1.8-11.14.4.1563"
+    runDir = "run"
+    mappings = "snapshot_20151216"
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", minecraft.version
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand 'version': project.version, 'mcversion': minecraft.version
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
