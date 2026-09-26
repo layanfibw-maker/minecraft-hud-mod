@@ -37,20 +37,16 @@ public class HUDEditorScreen extends GuiScreen {
         this.drawDefaultBackground();
         GlStateManager.enableBlend();
 
-        // Draw background
         drawRect(0, 0, this.width, this.height, 0x80000000);
 
-        // Draw elements with outlines
         for (HUDElement element : hudManager.getElements()) {
             if (element.visible) {
                 element.render(this.fontRendererObj);
-                // Draw selection box
                 int color = draggingElement == element ? 0xFF00FF00 : 0xFF00FFFF;
                 drawRect(element.x - 2, element.y - 2, element.x + element.width + 2, element.y + element.height + 2, color);
             }
         }
 
-        // Draw title
         this.drawCenteredString(this.fontRendererObj, "HUD Editor - Drag elements to reposition", this.width / 2, 10, 0xFFFFFF);
         this.drawString(this.fontRendererObj, "Mouse: " + mouseX + ", " + mouseY, 10, 30, 0xFFFFFF);
 
@@ -62,7 +58,7 @@ public class HUDEditorScreen extends GuiScreen {
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         super.mouseClicked(mouseX, mouseY, mouseButton);
 
-        if (mouseButton == 0) { // Left click
+        if (mouseButton == 0) {
             draggingElement = hudManager.getElementAt(mouseX, mouseY);
             if (draggingElement != null) {
                 dragOffsetX = mouseX - draggingElement.x;
@@ -90,7 +86,6 @@ public class HUDEditorScreen extends GuiScreen {
             int newX = mouseX - dragOffsetX;
             int newY = mouseY - dragOffsetY;
 
-            // Clamp to screen
             newX = Math.max(0, Math.min(newX, this.width - draggingElement.width));
             newY = Math.max(0, Math.min(newY, this.height - draggingElement.height));
 
@@ -100,13 +95,18 @@ public class HUDEditorScreen extends GuiScreen {
 
     @Override
     protected void actionPerformed(GuiButton button) {
-        if (button.id == 0) { // Reset
+        if (button.id == 0) {
             hudManager.getElements().clear();
-            hudManager.initElements();
-        } else if (button.id == 1) { // Save
+            hudManager.getElements().add(new com.hudmod.hud.elements.FPSElement(5, 5));
+            hudManager.getElements().add(new com.hudmod.hud.elements.ArmorElement(5, 20));
+            hudManager.getElements().add(new com.hudmod.hud.elements.SpeedElement(5, 35));
+            hudManager.getElements().add(new com.hudmod.hud.elements.CoordinatesElement(5, 50));
+            hudManager.getElements().add(new com.hudmod.hud.elements.DirectionElement(5, 65));
+            hudManager.getElements().add(new com.hudmod.hud.elements.PingElement(5, 80));
+        } else if (button.id == 1) {
             hudManager.savePositions();
             this.mc.displayGuiScreen(parent);
-        } else if (button.id == 2) { // Back
+        } else if (button.id == 2) {
             this.mc.displayGuiScreen(parent);
         }
     }

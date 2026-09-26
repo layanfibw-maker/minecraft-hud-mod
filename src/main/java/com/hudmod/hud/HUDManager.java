@@ -51,10 +51,8 @@ public class HUDManager {
     }
 
     public void savePositions() {
-        // TODO: Save positions to file
     }
 
     public void loadPositions() {
-        // TODO: Load positions from file
     }
 }
