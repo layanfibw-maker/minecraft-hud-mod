@@ -11,7 +11,7 @@ public class HUDManager {
     private List<HUDElement> elements;
 
     private HUDManager() {
-        this.elements = new ArrayList<>();
+        this.elements = new ArrayList<HUDElement>();
         initElements();
     }
 
@@ -19,7 +19,7 @@ public class HUDManager {
         return INSTANCE;
     }
 
-    private void initElements() {
+    public void initElements() {
         elements.add(new FPSElement(5, 5));
         elements.add(new ArmorElement(5, 20));
         elements.add(new SpeedElement(5, 35));
